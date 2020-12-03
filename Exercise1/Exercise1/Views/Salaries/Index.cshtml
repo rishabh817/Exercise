@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Exercise1.Models.Salary>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Payband)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BasicSalary)
+            </th>
+            <th>
+                Net Salary
+            </th>
+            <th>
+                InHandSalary
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Payband)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasicSalary)
+            </td>
+            <td>
+                @((@item.BasicSalary*.10)+(@item.BasicSalary*.05)+ (@item.BasicSalary * .05)+ (@item.BasicSalary))
+            </td>
+            <td>
+                @((@item.BasicSalary*.10)+(@item.BasicSalary*.05)+ (@item.BasicSalary * .05)+ (@item.BasicSalary)- (@item.BasicSalary*0.10))
+            </td>
+           
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Payband">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Payband">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Payband">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
